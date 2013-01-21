@@ -9,18 +9,18 @@ License:	GPL v2+
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
 # Source0-md5:	393a7832e71aa8cfd28793750f88de50
 Group:		Applications/System
-URL:		http://mate-desktop.org/
+URL:		http://wiki.mate-desktop.org/mate-notification-daemon
+BuildRequires:	dbus-glib-devel
 BuildRequires:	desktop-file-utils
+BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	icon-naming-utils
+BuildRequires:	libcanberra-devel
+BuildRequires:	libmatenotify-devel
+BuildRequires:	libmatewnck-devel
 BuildRequires:	mate-common
-BuildRequires:	pkgconfig(MateCORBA-2.0)
-BuildRequires:	pkgconfig(dbus-glib-1)
-BuildRequires:	pkgconfig(gsettings-desktop-schemas)
-BuildRequires:	pkgconfig(libcanberra)
-BuildRequires:	pkgconfig(libmatenotify)
-BuildRequires:	pkgconfig(libmatewnck)
-BuildRequires:	pkgconfig(mate-desktop-2.0)
-BuildRequires:	pkgconfig(mate-doc-utils)
+BuildRequires:	mate-desktop-devel
+BuildRequires:	mate-doc-utils
+#BuildRequires:	pkgconfig(MateCORBA-2.0)
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.26.0
