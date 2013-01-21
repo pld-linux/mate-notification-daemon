@@ -3,25 +3,30 @@
 #   http://git.gnome.org/browse/notification-daemon/commit/data?id=1ad20d22098bc7718614a8a87744a2c22d5438d0
 Summary:	Notification daemon for MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.5.0
-Release:	0.2
+Version:	1.5.1
+Release:	1
 License:	GPL v2+
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	393a7832e71aa8cfd28793750f88de50
+# Source0-md5:	7df51649d029d187fb2e0dbb8f7ecb4d
 Group:		Applications/System
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
-BuildRequires:	dbus-glib-devel
+BuildRequires:	dbus-devel >= 0.78
+BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
+BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	gsettings-desktop-schemas-devel
+BuildRequires:	gtk+2-devel > 2:2.18
 BuildRequires:	icon-naming-utils
+BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
+BuildRequires:	libcanberra-gtk-devel >= 0.4
 BuildRequires:	libmatenotify-devel
 BuildRequires:	libmatewnck-devel
 BuildRequires:	mate-common
 BuildRequires:	mate-desktop-devel
 BuildRequires:	mate-doc-utils
-#BuildRequires:	pkgconfig(MateCORBA-2.0)
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.26.0
 Requires:	gsettings-desktop-schemas
@@ -56,6 +61,9 @@ install -d $RPM_BUILD_ROOT%{_libdir}
 	LIBTOOL="%{_bindir}/libtool" \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# mate < 1.5 did not exist in pld, avoid dependency on mate-conf
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/mate-notification-daemon.convert
+
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/engines/lib*.la
 
 desktop-file-install \
@@ -82,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING README
+%doc AUTHORS README
 %attr(755,root,root) %{_bindir}/mate-notification-properties
 %{_desktopdir}/mate-notification-properties.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.mate.Notifications.service
