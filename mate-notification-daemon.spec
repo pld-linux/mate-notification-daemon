@@ -14,16 +14,13 @@ BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
 BuildRequires:	glib2-devel >= 1:2.18.0
-BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	gtk+2-devel > 2:2.18
-BuildRequires:	icon-naming-utils
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk-devel >= 0.4
 BuildRequires:	libmatenotify-devel
 BuildRequires:	libmatewnck-devel
 BuildRequires:	mate-common
-BuildRequires:	mate-desktop-devel
 BuildRequires:	mate-doc-utils
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
