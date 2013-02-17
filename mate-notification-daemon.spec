@@ -20,8 +20,8 @@ BuildRequires:	gtk+2-devel > 2:2.18
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk-devel >= 0.4
-BuildRequires:	libmatenotify-devel
-BuildRequires:	libwnck-devel
+BuildRequires:	libnotify-devel
+BuildRequires:	libwnck2-devel
 BuildRequires:	mate-common
 BuildRequires:	mate-doc-utils
 BuildRequires:	tar >= 1:1.22
