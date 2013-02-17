@@ -6,9 +6,11 @@ Name:		mate-notification-daemon
 Version:	1.5.1
 Release:	1
 License:	GPL v2+
+Group:		Applications/System
 Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
 # Source0-md5:	7df51649d029d187fb2e0dbb8f7ecb4d
-Group:		Applications/System
+Patch0:		use-libnotify.patch
+Patch1:		use-libwnck.patch
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
@@ -19,7 +21,7 @@ BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk-devel >= 0.4
 BuildRequires:	libmatenotify-devel
-BuildRequires:	libmatewnck-devel
+BuildRequires:	libwnck-devel
 BuildRequires:	mate-common
 BuildRequires:	mate-doc-utils
 BuildRequires:	tar >= 1:1.22
@@ -42,6 +44,8 @@ Notification daemon for MATE Desktop.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 NOCONFIGURE=1 ./autogen.sh
