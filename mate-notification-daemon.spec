@@ -3,12 +3,12 @@
 #   http://git.gnome.org/browse/notification-daemon/commit/data?id=1ad20d22098bc7718614a8a87744a2c22d5438d0
 Summary:	Notification daemon for MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.5.2
+Version:	1.6.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	0235405a3a69b341ebce23e7fee9365e
+Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
+# Source0-md5:	15a90379dc551f4858c9176758c7388f
 Patch1:		use-libwnck.patch
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	dbus-devel >= 0.78
