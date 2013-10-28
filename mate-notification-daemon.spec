@@ -85,12 +85,10 @@ $RPM_BUILD_ROOT%{_desktopdir}/mate-notification-properties.desktop
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
 %update_icon_cache hicolor
 %glib_compile_schemas
 
 %postun
-/sbin/ldconfig
 %update_icon_cache hicolor
 %glib_compile_schemas
 
