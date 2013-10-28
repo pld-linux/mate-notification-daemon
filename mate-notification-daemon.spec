@@ -3,14 +3,16 @@
 #   http://git.gnome.org/browse/notification-daemon/commit/data?id=1ad20d22098bc7718614a8a87744a2c22d5438d0
 Summary:	Notification daemon for MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.6.0
+Version:	1.6.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	15a90379dc551f4858c9176758c7388f
+# Source0-md5:	1c4eb6137fab8d83a15e1d68d0f865ea
 Patch1:		use-libwnck.patch
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
@@ -20,6 +22,7 @@ BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk-devel >= 0.4
 BuildRequires:	libnotify-devel
+BuildRequires:	libtool
 BuildRequires:	libwnck2-devel
 BuildRequires:	mate-common
 BuildRequires:	mate-doc-utils
@@ -46,18 +49,22 @@ Notification daemon for MATE Desktop.
 %patch1 -p1
 
 %build
-NOCONFIGURE=1 ./autogen.sh
+%{__intltoolize}
+%{__aclocal}
+%{__autoheader}
+%{__autoconf}
+%{__automake}
 %configure \
+	--disable-icon-update \
+	--disable-silent-rules \
 	--disable-static
 
-%{__make} \
-	V=1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}
 %{__make} install \
-	LIBTOOL="%{_bindir}/libtool" \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # mate < 1.5 did not exist in pld, avoid dependency on mate-conf
@@ -91,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/mate-notification-properties
+%{_mandir}/man1/mate-notification-properties.1*
 %{_desktopdir}/mate-notification-properties.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.mate.Notifications.service
 %dir %{_datadir}/%{name}
