@@ -1,7 +1,12 @@
 # NOTE:
 # - we could reuse gnome notification daemon if there is added xdg/autostart file with NotShowIn=GNOME:
 #   http://git.gnome.org/browse/notification-daemon/commit/data?id=1ad20d22098bc7718614a8a87744a2c22d5438d0
+#
+# Conditional build:
+%bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
+#
 Summary:	Notification daemon for MATE Desktop
+Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
 Version:	1.6.1
 Release:	1
@@ -11,38 +16,50 @@ Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
 # Source0-md5:	1c4eb6137fab8d83a15e1d68d0f865ea
 Patch1:		use-libwnck.patch
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.63
+BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
-BuildRequires:	glib2-devel >= 1:2.18.0
-BuildRequires:	gtk+2-devel > 2:2.18
+BuildRequires:	gdk-pixbuf2-devel >= 2.0
+BuildRequires:	gettext-devel >= 0.11
+BuildRequires:	glib2-devel >= 1:2.26.0
+%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.18.0}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk-devel >= 0.4
-BuildRequires:	libnotify-devel
-BuildRequires:	libtool
-BuildRequires:	libwnck2-devel
+BuildRequires:	libtool >= 2:2.2.6
+BuildRequires:	libwnck2-devel >= 1.0
 BuildRequires:	mate-common
 BuildRequires:	mate-doc-utils
+BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
+Requires:	dbus >= 0.78
+Requires:	dbus-glib >= 0.78
 Requires:	glib2 >= 1:2.26.0
 Requires:	gsettings-desktop-schemas
+%{!?with_gtk3:Requires:	gtk+2 >= 2:2.18.0}
+%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
+Requires:	libcanberra-gtk >= 0.4
 Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# makefiles and this spec gets confused if %{_libdir} == %{_libexecdir}
-# so we setup separate --libexecdir=%{_libdir}/mnd
-%define		_libexecdir %{_libdir}/mnd
+# NOTE: we must move %{_libexecdir}/mate-notification-daemon out of %{_libdir},
+# because it conflicts with %{_libdir}/mate-notification-daemon plugin dir
+# (unlike in mate-settings-daemon, we can use %{_libdir}/%{name} here - plugins exist in subdir)
+%define		_libexecdir %{_libdir}/%{name}
 
 %description
 Notification daemon for MATE Desktop.
+
+%description -l pl.UTF-8
+Demon powiadomień dla środowiska MATE Desktop.
 
 %prep
 %setup -q
@@ -50,20 +67,23 @@ Notification daemon for MATE Desktop.
 
 %build
 %{__intltoolize}
+%{__libtoolize}
 %{__aclocal}
-%{__autoheader}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--disable-icon-update \
 	--disable-silent-rules \
-	--disable-static
+	--disable-static \
+	%{?with_gtk3:--with-gtk=3.0}
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}
+#install -d $RPM_BUILD_ROOT%{_libdir}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -77,7 +97,7 @@ desktop-file-install \
 	--add-category="X-Mate" \
 	--delete-original \
 	--dir=$RPM_BUILD_ROOT%{_desktopdir} \
-$RPM_BUILD_ROOT%{_desktopdir}/mate-notification-properties.desktop
+	$RPM_BUILD_ROOT%{_desktopdir}/mate-notification-properties.desktop
 
 %find_lang %{name}
 
@@ -96,18 +116,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/mate-notification-properties
-%{_mandir}/man1/mate-notification-properties.1*
-%{_desktopdir}/mate-notification-properties.desktop
-%{_datadir}/dbus-1/services/org.freedesktop.mate.Notifications.service
-%dir %{_datadir}/%{name}
-%{_datadir}/%{name}/mate-notification-properties.ui
-%dir %{_libexecdir}
-%attr(755,root,root) %{_libexecdir}/mate-notification-daemon
-%{_iconsdir}/hicolor/*/apps/mate-notification-properties.*
-%{_datadir}/glib-2.0/schemas/org.mate.NotificationDaemon.gschema.xml
 %dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libexecdir}/mate-notification-daemon
 %dir %{_libdir}/%{name}/engines
 %attr(755,root,root) %{_libdir}/%{name}/engines/libcoco.so
 %attr(755,root,root) %{_libdir}/%{name}/engines/libnodoka.so
 %attr(755,root,root) %{_libdir}/%{name}/engines/libslider.so
 %attr(755,root,root) %{_libdir}/%{name}/engines/libstandard.so
+%{_datadir}/dbus-1/services/org.freedesktop.mate.Notifications.service
+%{_datadir}/glib-2.0/schemas/org.mate.NotificationDaemon.gschema.xml
+%{_datadir}/%{name}
+%{_desktopdir}/mate-notification-properties.desktop
+%{_iconsdir}/hicolor/*/apps/mate-notification-properties.*
+%{_mandir}/man1/mate-notification-properties.1*
