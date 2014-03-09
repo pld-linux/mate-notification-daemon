@@ -8,20 +8,19 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.6.1
+Version:	1.8.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	1c4eb6137fab8d83a15e1d68d0f865ea
-Patch1:		use-libwnck.patch
+Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
+# Source0-md5:	f9cb50a86c30bccc8728adcbf6a04f32
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
-BuildRequires:	gdk-pixbuf2-devel >= 2.0
+BuildRequires:	gdk-pixbuf2-devel >= 2.18.0
 BuildRequires:	gettext-devel >= 0.11
 BuildRequires:	glib2-devel >= 1:2.26.0
 %{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.18.0}
@@ -30,9 +29,9 @@ BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk-devel >= 0.4
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	libwnck2-devel >= 1.0
+%{!?with_gtk3:BuildRequires:	libwnck2-devel}
+%{?with_gtk3:BuildRequires:	libwnck-devel >= 3.0.0}
 BuildRequires:	mate-common
-BuildRequires:	mate-doc-utils
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
@@ -63,7 +62,6 @@ Demon powiadomień dla środowiska MATE Desktop.
 
 %prep
 %setup -q
-%patch1 -p1
 
 %build
 %{__intltoolize}
@@ -91,6 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/mate-notification-daemon.convert
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/engines/lib*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
 desktop-file-install \
 	--remove-category="MATE" \
