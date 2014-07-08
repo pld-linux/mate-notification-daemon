@@ -27,7 +27,8 @@ BuildRequires:	glib2-devel >= 1:2.26.0
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
-BuildRequires:	libcanberra-gtk-devel >= 0.4
+%{!?with_gtk3:BuildRequires:	libcanberra-gtk-devel >= 0.4}
+%{?with_gtk3:BuildRequires:	libcanberra-gtk3-devel >= 0.4}
 BuildRequires:	libtool >= 2:2.2.6
 %{!?with_gtk3:BuildRequires:	libwnck2-devel}
 %{?with_gtk3:BuildRequires:	libwnck-devel >= 3.0.0}
@@ -44,7 +45,8 @@ Requires:	gsettings-desktop-schemas
 %{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
-Requires:	libcanberra-gtk >= 0.4
+%{!?with_gtk3:Requires:	libcanberra-gtk >= 0.4}
+%{?with_gtk3:Requires:	libcanberra-gtk3 >= 0.4}
 Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -89,7 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/MateConf/gsettings/mate-notification-daemon.convert
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/engines/lib*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
 desktop-file-install \
 	--remove-category="MATE" \
