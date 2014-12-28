@@ -21,7 +21,7 @@ BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
 BuildRequires:	gdk-pixbuf2-devel >= 2.18.0
-BuildRequires:	gettext-devel >= 0.11
+BuildRequires:	gettext-tools >= 0.11
 BuildRequires:	glib2-devel >= 1:2.26.0
 %{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.18.0}
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
