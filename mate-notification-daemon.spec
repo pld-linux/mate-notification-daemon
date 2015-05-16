@@ -8,27 +8,28 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.8.2
+Version:	1.10.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
-# Source0-md5:	761bb0212f7524d4f785eca3d55bc597
+Source0:	http://pub.mate-desktop.org/releases/1.10/%{name}-%{version}.tar.xz
+# Source0-md5:	e037c8c5928f4697bd29a49e369c1574
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
-BuildRequires:	gdk-pixbuf2-devel >= 2.18.0
+BuildRequires:	gdk-pixbuf2-devel >= 2.22.0
 BuildRequires:	gettext-tools >= 0.11
-BuildRequires:	glib2-devel >= 1:2.26.0
-%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.18.0}
+BuildRequires:	glib2-devel >= 1:2.36.0
+%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-devel
 %{!?with_gtk3:BuildRequires:	libcanberra-gtk-devel >= 0.4}
 %{?with_gtk3:BuildRequires:	libcanberra-gtk3-devel >= 0.4}
+BuildRequires:	libnotify-devel
 BuildRequires:	libtool >= 2:2.2.6
 %{!?with_gtk3:BuildRequires:	libwnck2-devel}
 %{?with_gtk3:BuildRequires:	libwnck-devel >= 3.0.0}
@@ -39,9 +40,10 @@ BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires:	dbus >= 0.78
 Requires:	dbus-glib >= 0.78
-Requires:	glib2 >= 1:2.26.0
+Requires:	glib2 >= 1:2.36.0
+Requires:	gdk-pixbuf2 >= 2.22.0
 Requires:	gsettings-desktop-schemas
-%{!?with_gtk3:Requires:	gtk+2 >= 2:2.18.0}
+%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
 %{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
