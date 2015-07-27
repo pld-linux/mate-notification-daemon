@@ -4,16 +4,16 @@
 #
 # Conditional build:
 %bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
-#
+
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.10.0
+Version:	1.10.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://pub.mate-desktop.org/releases/1.10/%{name}-%{version}.tar.xz
-# Source0-md5:	e037c8c5928f4697bd29a49e369c1574
+# Source0-md5:	47b145c6cda51640d91b19e177078062
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
