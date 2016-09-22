@@ -2,18 +2,16 @@
 # - we could reuse gnome notification daemon if there is added xdg/autostart file with NotShowIn=GNOME:
 #   http://git.gnome.org/browse/notification-daemon/commit/data?id=1ad20d22098bc7718614a8a87744a2c22d5438d0
 #
-# Conditional build:
-%bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
 
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.14.1
+Version:	1.16.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.14/%{name}-%{version}.tar.xz
-# Source0-md5:	4a0452541d4f0be88f96f2ea417af6e2
+Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
+# Source0-md5:	411a5f69551db91c8e86bea89c674883
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
@@ -23,16 +21,13 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	gdk-pixbuf2-devel >= 2.22.0
 BuildRequires:	gettext-tools >= 0.11
 BuildRequires:	glib2-devel >= 1:2.36.0
-%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
-%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
+BuildRequires:	gtk+3-devel >= 3.14.0
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	libcanberra-devel
-%{!?with_gtk3:BuildRequires:	libcanberra-gtk-devel >= 0.4}
-%{?with_gtk3:BuildRequires:	libcanberra-gtk3-devel >= 0.4}
+BuildRequires:	libcanberra-gtk3-devel >= 0.4
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool >= 2:2.2.6
-%{!?with_gtk3:BuildRequires:	libwnck2-devel}
-%{?with_gtk3:BuildRequires:	libwnck-devel >= 3.0.0}
+BuildRequires:	libwnck-devel >= 3.0.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
@@ -43,12 +38,10 @@ Requires:	dbus-glib >= 0.78
 Requires:	glib2 >= 1:2.36.0
 Requires:	gdk-pixbuf2 >= 2.22.0
 Requires:	gsettings-desktop-schemas
-%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
-%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
+Requires:	gtk+3 >= 3.14.0
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
-%{!?with_gtk3:Requires:	libcanberra-gtk >= 0.4}
-%{?with_gtk3:Requires:	libcanberra-gtk3 >= 0.4}
+Requires:	libcanberra-gtk3 >= 0.4
 Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -77,8 +70,7 @@ Demon powiadomień dla środowiska MATE Desktop.
 %configure \
 	--disable-icon-update \
 	--disable-silent-rules \
-	--disable-static \
-	%{?with_gtk3:--with-gtk=3.0}
+	--disable-static
 
 %{__make}
 
