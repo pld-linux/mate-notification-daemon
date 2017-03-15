@@ -6,12 +6,12 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.16.1
+Version:	1.18.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
-# Source0-md5:	39bf3b905a307c9a1c864a0fd1134227
+Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
+# Source0-md5:	d2d3e92b4d3138e78ae0389f0d9aabb0
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/engines/lib*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/frp
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ}
 
 desktop-file-install \
 	--remove-category="MATE" \
