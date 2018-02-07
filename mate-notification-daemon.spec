@@ -6,12 +6,12 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.18.1
+Version:	1.20.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
-# Source0-md5:	b417e04db09209c4bfb1a782f3c2555a
+Source0:	http://pub.mate-desktop.org/releases/1.20/%{name}-%{version}.tar.xz
+# Source0-md5:	00424ad71e27682b6a0c262a5f35dd0b
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
@@ -20,8 +20,8 @@ BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
 BuildRequires:	gdk-pixbuf2-devel >= 2.22.0
 BuildRequires:	gettext-tools >= 0.11
-BuildRequires:	glib2-devel >= 1:2.36.0
-BuildRequires:	gtk+3-devel >= 3.14.0
+BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel >= 0.4
@@ -35,10 +35,10 @@ BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires:	dbus >= 0.78
 Requires:	dbus-glib >= 0.78
-Requires:	glib2 >= 1:2.36.0
 Requires:	gdk-pixbuf2 >= 2.22.0
+Requires:	glib2 >= 1:2.50.0
 Requires:	gsettings-desktop-schemas
-Requires:	gtk+3 >= 3.14.0
+Requires:	gtk+3 >= 3.22.0
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	libcanberra-gtk3 >= 0.4
