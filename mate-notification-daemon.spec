@@ -46,10 +46,12 @@ Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%if "%{_libexecdir}" == "%{_libdir}"
 # NOTE: we must move %{_libexecdir}/mate-notification-daemon out of %{_libdir},
 # because it conflicts with %{_libdir}/mate-notification-daemon plugin dir
 # (unlike in mate-settings-daemon, we can use %{_libdir}/%{name} here - plugins exist in subdir)
 %define		_libexecdir %{_libdir}/%{name}
+%endif
 
 %description
 Notification daemon for MATE Desktop.
@@ -76,7 +78,6 @@ Demon powiadomień dla środowiska MATE Desktop.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT%{_libdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -108,8 +109,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/mate-notification-properties
-%dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/mate-notification-daemon
+%dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/engines
 %attr(755,root,root) %{_libdir}/%{name}/engines/libcoco.so
 %attr(755,root,root) %{_libdir}/%{name}/engines/libnodoka.so
