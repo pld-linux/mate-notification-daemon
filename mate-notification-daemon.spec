@@ -6,17 +6,16 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.20.2
+Version:	1.22.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.20/%{name}-%{version}.tar.xz
-# Source0-md5:	1064bb17bec370a774c32fca99746547
+Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
+# Source0-md5:	3bf3acd1a7132d47c548e24f505fd88f
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-devel >= 0.78
-BuildRequires:	dbus-glib-devel >= 0.78
 BuildRequires:	desktop-file-utils
 BuildRequires:	gdk-pixbuf2-devel >= 2.22.0
 BuildRequires:	gettext-tools >= 0.11
@@ -34,7 +33,6 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires:	dbus >= 0.78
-Requires:	dbus-glib >= 0.78
 Requires:	gdk-pixbuf2 >= 2.22.0
 Requires:	glib2 >= 1:2.50.0
 Requires:	gsettings-desktop-schemas
