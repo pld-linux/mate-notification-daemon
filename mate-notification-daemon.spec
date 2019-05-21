@@ -81,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/engines/lib*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,kab,ku_IQ}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ}
 
 desktop-file-install \
 	--remove-category="MATE" \
@@ -105,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS README
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/mate-notification-properties
 %attr(755,root,root) %{_libexecdir}/mate-notification-daemon
 %dir %{_libdir}/%{name}
