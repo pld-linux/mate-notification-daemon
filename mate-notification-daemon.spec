@@ -6,22 +6,21 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.22.1
+Version:	1.24.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
-# Source0-md5:	de70cb2a89d045bab11a5be054441560
+Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
+# Source0-md5:	e79219044b3d19d7e05b5163740148e2
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	desktop-file-utils
 BuildRequires:	gdk-pixbuf2-devel >= 2.22.0
-BuildRequires:	gettext-tools >= 0.11
+BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gtk+3-devel >= 3.22.0
-BuildRequires:	intltool >= 0.50.1
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel >= 0.4
 BuildRequires:	libnotify-devel
@@ -61,7 +60,6 @@ Demon powiadomień dla środowiska MATE Desktop.
 %setup -q
 
 %build
-%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -116,7 +114,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/engines/libstandard.so
 %{_datadir}/dbus-1/services/org.freedesktop.mate.Notifications.service
 %{_datadir}/glib-2.0/schemas/org.mate.NotificationDaemon.gschema.xml
-%{_datadir}/%{name}
 %{_desktopdir}/mate-notification-properties.desktop
 %{_iconsdir}/hicolor/*/apps/mate-notification-properties.*
 %{_mandir}/man1/mate-notification-properties.1*
