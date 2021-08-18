@@ -6,12 +6,12 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.24.2
+Version:	1.26.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	https://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
-# Source0-md5:	a4fe071c5337e88c27b7991679dca425
+Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
+# Source0-md5:	025355ddf1155c2b9260c60efd1996ee
 URL:		http://wiki.mate-desktop.org/mate-notification-daemon
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
@@ -19,21 +19,23 @@ BuildRequires:	dbus-devel >= 0.78
 BuildRequires:	desktop-file-utils
 BuildRequires:	gdk-pixbuf2-devel >= 2.22.0
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	glib2-devel >= 1:2.68.0
 BuildRequires:	gtk+3-devel >= 3.22.0
+BuildRequires:	gtk-layer-shell-devel
 BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel >= 0.4
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libwnck-devel >= 3.0.0
 BuildRequires:	mate-common
+BuildRequires:	mate-panel-devel >= 1.17.0
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires:	dbus >= 0.78
 Requires:	gdk-pixbuf2 >= 2.22.0
-Requires:	glib2 >= 1:2.50.0
+Requires:	glib2 >= 1:2.68.0
 Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22.0
 Requires:	gtk-update-icon-cache
@@ -41,6 +43,7 @@ Requires:	hicolor-icon-theme
 Requires:	libcanberra-gtk3 >= 0.4
 Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
+Suggests:	mate-applet-notification
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %if "%{_libexecdir}" == "%{_libdir}"
@@ -55,6 +58,18 @@ Notification daemon for MATE Desktop.
 
 %description -l pl.UTF-8
 Demon powiadomień dla środowiska MATE Desktop.
+
+%package -n mate-applet-notification
+Summary:	Notification Daemon applet for MATE Desktop
+Summary(pl.UTF-8):	Aplet demona powiadomień dla środowiska MATE Desktop
+Requires:	%{name} = %{version}-%{release}
+Requires:	mate-panel-libs >= 1.17.0
+
+%description -n mate-applet-notification
+Notification Daemon applet for MATE Desktop.
+
+%description -n mate-applet-notification -l pl.UTF-8
+Aplet demona powiadomień dla środowiska MATE Desktop.
 
 %prep
 %setup -q
@@ -117,3 +132,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/mate-notification-properties.desktop
 %{_iconsdir}/hicolor/*/apps/mate-notification-properties.*
 %{_mandir}/man1/mate-notification-properties.1*
+
+%files -n mate-applet-notification
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libexecdir}/mate-notification-applet
+%{_datadir}/dbus-1/services/org.mate.panel.applet.MateNotificationAppletFactory.service
+%{_datadir}/mate-panel/applets/org.mate.applets.MateNotificationApplet.mate-panel-applet
