@@ -12,7 +12,7 @@ License:	GPL v2+
 Group:		Applications/System
 Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
 # Source0-md5:	025355ddf1155c2b9260c60efd1996ee
-URL:		http://wiki.mate-desktop.org/mate-notification-daemon
+URL:		https://wiki.mate-desktop.org/mate-desktop/components/mate-notification-daemon/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-devel >= 0.78
