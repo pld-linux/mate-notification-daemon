@@ -26,8 +26,8 @@ BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel >= 0.4
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	libxml2-devel >= 2.9.0
-BuildRequires:	libxml2-progs
+BuildRequires:	libxml2-devel >= 1:2.9.0
+BuildRequires:	libxml2-progs >= 1:2.9.0
 BuildRequires:	libwnck-devel >= 3.0.0
 BuildRequires:	mate-common
 BuildRequires:	mate-desktop-devel >= 1.17.0
@@ -44,7 +44,7 @@ Requires:	gtk+3 >= 3.22.0
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	libcanberra-gtk3 >= 0.4
-Requires:	libxml2 >= 2.9.0
+Requires:	libxml2 >= 1:2.9.0
 Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
 Suggests:	mate-applet-notification
