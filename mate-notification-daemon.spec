@@ -26,8 +26,11 @@ BuildRequires:	libcanberra-devel
 BuildRequires:	libcanberra-gtk3-devel >= 0.4
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool >= 2:2.2.6
+BuildRequires:	libxml2-devel >= 2.9.0
+BuildRequires:	libxml2-progs
 BuildRequires:	libwnck-devel >= 3.0.0
 BuildRequires:	mate-common
+BuildRequires:	mate-desktop-devel >= 1.17.0
 BuildRequires:	mate-panel-devel >= 1.17.0
 BuildRequires:	pkgconfig
 BuildRequires:	tar >= 1:1.22
@@ -41,6 +44,7 @@ Requires:	gtk+3 >= 3.22.0
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	libcanberra-gtk3 >= 0.4
+Requires:	libxml2 >= 2.9.0
 Provides:	dbus(org.freedesktop.Notifications)
 Requires(post,postun):	/sbin/ldconfig
 Suggests:	mate-applet-notification
@@ -63,6 +67,8 @@ Demon powiadomień dla środowiska MATE Desktop.
 Summary:	Notification Daemon applet for MATE Desktop
 Summary(pl.UTF-8):	Aplet demona powiadomień dla środowiska MATE Desktop
 Requires:	%{name} = %{version}-%{release}
+Requires:	glib2 >= 1:2.68.0
+Requires:	mate-desktop >= 1.17.0
 Requires:	mate-panel-libs >= 1.17.0
 
 %description -n mate-applet-notification
