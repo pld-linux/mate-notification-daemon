@@ -6,12 +6,12 @@
 Summary:	Notification daemon for MATE Desktop
 Summary(pl.UTF-8):	Demon powiadomień dla środowiska MATE Desktop
 Name:		mate-notification-daemon
-Version:	1.26.1
+Version:	1.28.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
-# Source0-md5:	b9e30f30e08052426e10d99ef8aa8d68
+Source0:	https://pub.mate-desktop.org/releases/1.28/%{name}-%{version}.tar.xz
+# Source0-md5:	272f2842e4bf7ac269b57ae9b519e454
 URL:		https://wiki.mate-desktop.org/mate-desktop/components/mate-notification-daemon/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.10
@@ -133,6 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/engines/libnodoka.so
 %attr(755,root,root) %{_libdir}/%{name}/engines/libslider.so
 %attr(755,root,root) %{_libdir}/%{name}/engines/libstandard.so
+/etc/xdg/autostart/mate-notification-daemon.desktop
 %{_datadir}/dbus-1/services/org.freedesktop.mate.Notifications.service
 %{_datadir}/glib-2.0/schemas/org.mate.NotificationDaemon.gschema.xml
 %{_desktopdir}/mate-notification-properties.desktop
